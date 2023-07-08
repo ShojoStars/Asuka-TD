@@ -1,4 +1,4 @@
-wait(5)
+task.wait(5)
 
 local RS = game:GetService("ReplicatedStorage")
 

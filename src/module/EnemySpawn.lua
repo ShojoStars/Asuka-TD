@@ -17,7 +17,7 @@ function module.SpawnRegular(mob, amount, spawnInterval)
                 end
             end
         end)
-        if spawnInterval then wait(spawnInterval) end
+        if spawnInterval then task.wait(spawnInterval) end
     end
 end
 
