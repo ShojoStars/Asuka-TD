@@ -7,7 +7,7 @@ function module.SpawnRegular(mob, amount, spawnInterval)
         local char = mob:Clone()
         char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.NormalWaypoints.First.CFrame
         char.Parent = workspace.Enemies
-        spawn(function()
+        task.spawn(function()
             for i = 1, #workspace.Path.NormalWaypoints:GetChildren(), 1 do
                 for _, waypoint in pairs(workspace.Path.NormalWaypoints:GetChildren()) do
                     if waypoint.Waypoint.Value == i and i ~= 1 then
