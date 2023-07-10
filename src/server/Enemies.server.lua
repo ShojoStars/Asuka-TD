@@ -9,4 +9,4 @@ local spawnModule = require(modules:WaitForChild("EnemySpawn"))
 local towerModule = require(modules:WaitForChild("Towers"))
 
 spawnModule.SpawnRegular(enemies:WaitForChild("TestingDummy"), 10, 0.5)
-towerModule.SpawnTest(654.278, -1.127, -55.85, 0, 170, 0)
+towerModule.SpawnTest(Vector3.new(654.278, -1.127, -55.85), Vector3.new(0, 170, 0))
