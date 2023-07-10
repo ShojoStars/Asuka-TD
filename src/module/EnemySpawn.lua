@@ -12,6 +12,7 @@ function module.SpawnRegular(mob, amount, spawnInterval)
                 for _, waypoint in pairs(workspace.Path.NormalWaypoints:GetChildren()) do
                     if waypoint.Waypoint.Value == i and i ~= 1 then
                         char:WaitForChild("Humanoid"):MoveTo(waypoint.Position)
+                        char.NextPos.Value = waypoint.Position
                         char.Humanoid.MoveToFinished:Wait()
                     end
                 end
