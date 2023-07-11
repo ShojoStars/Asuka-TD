@@ -10,14 +10,14 @@ PhysicsService:CollisionGroupsAreCollidable("Enemies", "Enemies", false)
 
 		for i = 1, amount, 1 do
 		local char = mob:Clone()
-		char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.NormalWaypoints.First.CFrame
+		char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.Spawn.CFrame
+		char.Parent = workspace.Enemies
 		char.HumanoidRootPart:SetNetworkOwner(nil)
 		for _, part in pairs(char:GetChildren()) do
 			if part:IsA("BasePart") or part:IsA("MeshPart") then
 				PhysicsService:SetPartCollisionGroup("Enemies", part)
 			end
 		end
-		char.Parent = workspace.Enemies
 		task.spawn(function()
 			for i = 1, #workspace.Path.NormalWaypoints:GetChildren(), 1 do
 				for _, waypoint in pairs(workspace.Path.NormalWaypoints:GetChildren()) do
