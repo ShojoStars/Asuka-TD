@@ -3,7 +3,7 @@ local module = {}
 local PhysicsService = game:GetService("PhysicsService")
 
 PhysicsService:CreateCollisionGroup("Enemies")
-PhysicsService:CollisionGroupsAreCollidable("Enemies", "Enemies", false)
+PhysicsService:CollisionGroupSetCollidable("Enemies", "Enemies", false)
 
 	function module.SpawnRegular(mob, amount, spawnInterval)
 		if not amount then amount = 1 end
@@ -11,13 +11,13 @@ PhysicsService:CollisionGroupsAreCollidable("Enemies", "Enemies", false)
 		for i = 1, amount, 1 do
 		local char = mob:Clone()
 		char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.Spawn.CFrame
-		char.Parent = workspace.Enemies
-		char.HumanoidRootPart:SetNetworkOwner(nil)
 		for _, part in pairs(char:GetChildren()) do
 			if part:IsA("BasePart") or part:IsA("MeshPart") then
-				PhysicsService:SetPartCollisionGroup("Enemies", part)
+				part.CollisionGroup = "Enemies"
 			end
 		end
+		char.Parent = workspace.Enemies
+		char.HumanoidRootPart:SetNetworkOwner(nil)
 		task.spawn(function()
 			for i = 1, #workspace.Path.NormalWaypoints:GetChildren(), 1 do
 				for _, waypoint in pairs(workspace.Path.NormalWaypoints:GetChildren()) do
