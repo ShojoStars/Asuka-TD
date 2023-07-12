@@ -13,8 +13,12 @@ game.Players.PlayerAdded:Connect(function(player)
     Yen.Value = 0
     Yen.Parent = Stats
 
+    --// Currency Used for Tower Spawning Must always be set at 0
+    local Coins = Instance.new("IntValue")
+    Coins.Name = "Coins"
+    Coins.Value = 0
+    Coins.Parent = Stats
     --//Load the Yen
-
     pcall(function(sucess,error)
         if sucess then
             --// Add More if Neccessary
@@ -23,7 +27,6 @@ game.Players.PlayerAdded:Connect(function(player)
             warn("Error Getting Player Data or Player Has No Data")
         end
     end)
-
     game.Players.PlayerRemoving:Connect(function()
         ---// Saves Player Data
         pcall(function(sucess,error)
