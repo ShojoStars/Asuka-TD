@@ -11,7 +11,7 @@ function module.SpawnTest(cframe)
     -- // tower settings
     local damage = 10
     local cooldown = 0.5
-    local range = 10
+    local range = 1000
 
     local tower = towers.TestingTower:Clone()
     tower.PrimaryPart.CFrame = cframe
@@ -26,10 +26,12 @@ function module.SpawnTest(cframe)
             if enemy.PrimaryPart and enemy.NextPos then
                 -- // Checking if the tower is in range, and checking which one is the closest to their next waypoint
                 if (tower.PrimaryPart.Position - enemy.PrimaryPart.Position).Magnitude < range and enemy.Humanoid.Health > 0 then
-                    if enemy.NextWaypoint.Value > furthestPos or (enemy.NextPos.Value - enemy.PrimaryPart.Position).Magnitude < closestDistance and enemy.NextWaypoint.Value >= furthestPos then
-                        closestDistance = (tower.PrimaryPart.Position - enemy.PrimaryPart.Position).Magnitude
-                        furthestPos = enemy.NextWaypoint.Value
-                        closestTarget = enemy
+                    if enemy.NextWaypoint.Value >= furthestPos then
+                        if enemy.NextWaypoint.Value > furthestPos or (enemy.PrimaryPart.Position - enemy.NextPos.Value).Magnitude < closestDistance then
+                            closestDistance = (enemy.PrimaryPart.Position - enemy.NextPos.Value).Magnitude
+                            furthestPos = enemy.NextWaypoint.Value
+                            closestTarget = enemy
+                        end
                     end
                 end
             end
