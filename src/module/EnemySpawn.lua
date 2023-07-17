@@ -5,11 +5,12 @@ local PhysicsService = game:GetService("PhysicsService")
 PhysicsService:CreateCollisionGroup("Enemies")
 PhysicsService:CollisionGroupSetCollidable("Enemies", "Enemies", false)
 
-	function module.SpawnRegular(mob, amount, spawnInterval)
+	function module.SpawnRegular(mob, amount, spawnInterval,HealthPoints)
 		if not amount then amount = 1 end
 
 		for i = 1, amount, 1 do
 		local char = mob:Clone()
+		char.Humanoid.Health = HealthPoints
 		char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.Spawn.CFrame
 		for _, part in pairs(char:GetChildren()) do
 			if part:IsA("BasePart") or part:IsA("MeshPart") then
