@@ -1,4 +1,4 @@
-local module = {}
+git local module = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -11,8 +11,7 @@ function module.SpawnTest(cframe)
     -- // tower settings
     local damage = 10
     local cooldown = 0.5
-    local range = 1000
-
+    local range = 10
     local tower = towers.TestingTower:Clone()
     tower.PrimaryPart.CFrame = cframe
     tower.Parent = workspace.Towers
