@@ -1,6 +1,6 @@
 local RPS = game:GetService("ReplicatedStorage")
-local RewardsHandler = require(RPS.module.RewardsHandler)
-local EnemySpawnModule = require(RPS.EnemySpawnModule)
+local RewardsHandler = require(RPS:WaitForChild("Shared").RewardsHandler)
+local EnemySpawnModule = require(RPS:WaitForChild("Shared").EnemySpawn)
 
 local Rewards = {
 	Normal = 150,
@@ -72,7 +72,7 @@ local function spawnWave(waveData)
                 local enemy = EnemiesFolder:FindFirstChild(enemyData.enemyType)
                 if enemy then
                     -- Spawn enemy using enemy object
-                    EnemySpawnModule.SpawnRegular(enemy,waveData.quantity,1,waveData.totalHP)
+                    EnemySpawnModule.SpawnRegular(enemy,waveData.quantity,3,waveData.totalHP)
                     -- Set enemy properties, e.g., position, AI behavior, etc. ( within the module )
                 end
             end
@@ -86,6 +86,7 @@ end
 local function StartWaves()
 	-- Example: Spawning all 40 waves
 	for _, waveData in ipairs(waves) do
+        warn("You are Now On Wave:".._)
 		spawnWave(waveData)
 		task.wait(10) -- Wait 10 seconds before spawning the next wave (adjust as needed)
 	end
