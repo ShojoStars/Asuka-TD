@@ -1,4 +1,4 @@
-git local module = {}
+local module = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
