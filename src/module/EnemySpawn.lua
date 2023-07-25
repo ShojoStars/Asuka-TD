@@ -1,6 +1,7 @@
 local module = {}
 
 local PhysicsService = game:GetService("PhysicsService")
+local DebrisService = game:GetService("Debris")
 
 PhysicsService:CreateCollisionGroup("Enemies")
 PhysicsService:CollisionGroupSetCollidable("Enemies", "Enemies", false)
@@ -10,13 +11,21 @@ PhysicsService:CollisionGroupSetCollidable("Enemies", "Enemies", false)
 
 		for i = 1, amount, 1 do
 		local char = mob:Clone()
-		char.Humanoid.Health = HealthPoints
+		char.Humanoid.MaxHealth = HealthPoints
+
+		--// Removes Dead Chunks from the Map!
+		char.Humanoid.Died:Connect(function()
+			DebrisService:AddItem(char, 1)
+		end)
+		--//
+		
 		char:WaitForChild("HumanoidRootPart").CFrame = workspace.Path.Spawn.CFrame
 		for _, part in pairs(char:GetChildren()) do
 			if part:IsA("BasePart") or part:IsA("MeshPart") then
 				part.CollisionGroup = "Enemies"
 			end
 		end
+
 		char.Parent = workspace.Enemies
 		char.HumanoidRootPart:SetNetworkOwner(nil)
 		task.spawn(function()
