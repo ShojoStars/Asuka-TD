@@ -1,13 +1,16 @@
 local RPS = game:GetService("ReplicatedStorage")
 local RewardsHandler = require(RPS:WaitForChild("Shared").RewardsHandler)
 local EnemySpawnModule = require(RPS:WaitForChild("Shared").EnemySpawn)
-
+local Variables = RPS.Variables
+local WaveDigits = Variables.WaveNumber
 local Rewards = {
 	Normal = 150,
 	Corruption = 250,
 	Nightmare = 500,
 	AllStar = 800,
 }
+
+WaveDigits.Value = 0
 
 local waves = {
     {waveNumber = 1, enemies = {{enemyType = "Zakena", quantity = 5}}, totalHP = 25},
@@ -87,6 +90,7 @@ local function StartWaves()
 	-- Example: Spawning all 40 waves
 	for _, waveData in ipairs(waves) do
         warn("You are Now On Wave:".._)
+		WaveDigits.Value = WaveDigits.Value + 1
 		spawnWave(waveData)
 		task.wait(10) -- Wait 10 seconds before spawning the next wave (adjust as needed)
 	end
