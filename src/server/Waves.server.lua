@@ -9,9 +9,6 @@ local Rewards = {
 	Nightmare = 500,
 	AllStar = 800,
 }
-
-WaveDigits.Value = 0
-
 local waves = {
     {waveNumber = 1, enemies = {{enemyType = "Zakena", quantity = 5}}, totalHP = 25},
     {waveNumber = 2, enemies = {{enemyType = "Zakena", quantity = 6}}, totalHP = 30},
