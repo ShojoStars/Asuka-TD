@@ -3,7 +3,7 @@ local module = {}
 local PhysicsService = game:GetService("PhysicsService")
 local DebrisService = game:GetService("Debris")
 
-PhysicsService:CreateCollisionGroup("Enemies")
+PhysicsService:RegisterCollisionGroup("Enemies")
 PhysicsService:CollisionGroupSetCollidable("Enemies", "Enemies", false)
 
 	function module.SpawnRegular(mob, amount, spawnInterval,HealthPoints)
