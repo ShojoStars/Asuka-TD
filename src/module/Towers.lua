@@ -7,12 +7,12 @@ local towers = ReplicatedStorage:WaitForChild("Towers")
 
 -- // Testing tower spawn
 
-function module.SpawnTest(cframe)
+function module.SpawnTower(Tower,cframe)
     -- // tower settings
     local damage = 10
     local cooldown = 0.5
     local range = 10
-    local tower = towers.TestingTower:Clone()
+    local tower = Tower:Clone()
     tower.PrimaryPart.CFrame = cframe
     tower.Parent = workspace.Towers
 
