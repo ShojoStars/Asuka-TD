@@ -65,6 +65,7 @@ local base = path:WaitForChild("Base")
 
 -- Function to spawn enemies based on wave data
 local function spawnWave(waveData)
+	WaveDigits.Value = WaveDigits.Value + 1
     if waveData then
         for _, enemyData in ipairs(waveData.enemies) do
             for i = 1, enemyData.quantity do
@@ -86,7 +87,6 @@ end
 local function StartWaves()
 	-- Example: Spawning all 40 waves
 	for _, waveData in ipairs(waves) do
-		WaveDigits.Value = WaveDigits.Value + 1
         warn("You are Now On Wave:".._)
 		spawnWave(waveData)
 		task.wait(10) -- Wait 10 seconds before spawning the next wave (adjust as needed)
