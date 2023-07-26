@@ -89,8 +89,8 @@ end
 local function StartWaves()
 	-- Example: Spawning all 40 waves
 	for _, waveData in ipairs(waves) do
-        warn("You are Now On Wave:".._)
 		WaveDigits.Value = WaveDigits.Value + 1
+        warn("You are Now On Wave:".._)
 		spawnWave(waveData)
 		task.wait(10) -- Wait 10 seconds before spawning the next wave (adjust as needed)
 	end
