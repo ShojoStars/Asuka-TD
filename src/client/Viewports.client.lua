@@ -16,12 +16,6 @@ local Enemies = RPS.Enemies
 local Towers = RPS.Towers
 local ViewportModel = require(RPS.Shared.Viewports)
 --//
-
---// Functions for the Client
-Variables.WaveNumber:GetPropertyChangedSignal("Value"):Connect(function()
-    WaveText.Text = Variables.WaveNumber.Value
-end)
-
 --// Handles Tower Viewports
 local function SetupViewPorts(ViewportFrame)
 	for index, model in pairs(Towers:GetChildren()) do
