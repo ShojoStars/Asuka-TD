@@ -1,14 +1,21 @@
+--// Dependencies for Server
 local RPS = game:GetService("ReplicatedStorage")
 local RewardsHandler = require(RPS:WaitForChild("Shared").RewardsHandler)
-local EnemySpawnModule = require(RPS:WaitForChild("Shared").EnemySpawn)
+local EnemySpawnModule = require(script.EnemySpawn)
 local Variables = RPS.Variables
 local WaveDigits = Variables.WaveNumber
+--//
+
+--// Rewards for each mode
 local Rewards = {
 	Normal = 150,
 	Corruption = 250,
 	Nightmare = 500,
 	AllStar = 800,
 }
+--//
+
+--// Wave Definition 
 local waves = {
     {waveNumber = 1, enemies = {{enemyType = "Zakena", quantity = 5}}, totalHP = 25},
     {waveNumber = 2, enemies = {{enemyType = "Zakena", quantity = 6}}, totalHP = 30},
@@ -56,6 +63,7 @@ local waves = {
     {waveNumber = 39, enemies = {{enemyType = "PlaceHold F", quantity = 4}, {enemyType = "PlaceHold E", quantity = 10}, {enemyType = "PlaceHold D", quantity = 10}, {enemyType = "Boss2", quantity = 1}}, totalHP = 22300},
     {waveNumber = 40, enemies = {{enemyType = "FinalBoss", quantity = 1}}, totalHP = 55000},
 }
+--//
 
 -- Fetch necessary objects and elements
 local EnemiesFolder = RPS:WaitForChild("Enemies")
@@ -73,7 +81,7 @@ local function spawnWave(waveData)
                 local enemy = EnemiesFolder:FindFirstChild(enemyData.enemyType)
                 if enemy then
                     -- Spawn enemy using enemy object
-                    EnemySpawnModule.SpawnRegular(enemy,waveData.quantity,3,waveData.totalHP)
+                    EnemySpawnModule.SpawnRegular(enemy,waveData.quantity,5,waveData.totalHP)
                     -- Set enemy properties, e.g., position, AI behavior, etc. ( within the module )
                 end
             end

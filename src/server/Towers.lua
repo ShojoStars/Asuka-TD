@@ -12,7 +12,7 @@ function module.SpawnTower(Tower,cframe)
     local damage = 10
     local cooldown = 0.5
     local range = 10
-    local tower = Tower:Clone()
+    local tower = towers:FindFirstChild(Tower):Clone()
     tower.PrimaryPart.CFrame = cframe
     tower.Parent = workspace.Towers
 
