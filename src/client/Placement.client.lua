@@ -16,6 +16,8 @@ local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
 local Camera = workspace.CurrentCamera
 PlaceHolderTower = nil
+CanPlace = false
+Rotation = 0
 --//
 
 --// Gets Mouse Raycast
@@ -37,11 +39,19 @@ local function PlaceTower(Tower)
 		Tower = Tower:Clone()
 		Tower.Parent = workspace.Towers
 		PlaceHolderTower = Tower
-		for i,v in pairs(Tower:GetDescendants()) do
+		for i,v in pairs(PlaceHolderTower:GetDescendants()) do
 			if v:IsA("BasePart") or v:IsA("MeshPart") then
 				v.CollisionGroup = "Towers"
 				v.Material = Enum.Material.ForceField
 			end
+		end
+	end
+end
+
+local function ColorTower(Color)
+	for i, v in pairs(PlaceHolderTower:GetDescendants()) do
+		if v:IsA("BasePart") or v:IsA("MeshPart") then
+			v.Color = Color
 		end
 	end
 end
@@ -95,9 +105,14 @@ UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
 
 	if PlaceHolderTower then
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
-			TowerEvent:FireServer(PlaceHolderTower.Name, PlaceHolderTower.PrimaryPart.CFrame)
-			PlaceHolderTower:Destroy()
-			PlaceHolderTower = nil
+			if CanPlace then
+				TowerEvent:FireServer(PlaceHolderTower.Name, PlaceHolderTower.PrimaryPart.CFrame)
+				PlaceHolderTower:Destroy()
+				PlaceHolderTower = nil
+				Rotation = 0
+			end
+		elseif input.KeyCode == Enum.KeyCode.R then
+			Rotation += 90
 		end
 	end
 end)
@@ -106,14 +121,21 @@ RunService.RenderStepped:Connect(function(deltaTime)
 	if PlaceHolderTower ~= nil then
 		local result = MouseRaycast({PlaceHolderTower,Player.Character})
 		if result and result.Instance then
+			if result.Instance.Parent.Name == "TowerArea" then
+				CanPlace = true
+				ColorTower(Color3.new(0.298039, 1, 0.262745))
+				else
+					CanPlace = false
+					ColorTower(Color3.new(1,0,0))
+			end
 			local Positions = 
 			{
 				x = result.Position.X,
-				y = result.Position.Y + PlaceHolderTower.Humanoid.HipHeight + (PlaceHolderTower.PrimaryPart.Size.Y / 2),
+				y = result.Position.Y + PlaceHolderTower.Humanoid.HipHeight,
 				z = result.Position.Z
 			}
 
-			local cframe = CFrame.new(Positions.x,Positions.y,Positions.z)
+			local cframe = CFrame.new(Positions.x,Positions.y,Positions.z) * CFrame.Angles(0,math.rad(Rotation),0)
 			PlaceHolderTower:SetPrimaryPartCFrame(cframe)
 		end
 	end
