@@ -20,8 +20,7 @@ CanPlace = false
 Rotation = 0
 --//
 
---// Gets Mouse Raycast
-
+--// Gets Mouse Raycasts
 local function MouseRaycast(Blacklist)
 	local MousePosition = UserInputService:GetMouseLocation()
 	local mouseRay = Camera:ViewportPointToRay(MousePosition.X,MousePosition.Y)
@@ -41,7 +40,7 @@ local function PlaceTower(Tower)
 		PlaceHolderTower = Tower
 		for i,v in pairs(PlaceHolderTower:GetDescendants()) do
 			if v:IsA("BasePart") or v:IsA("MeshPart") then
-				v.CollisionGroup = "Towers"
+				v.CollisionGroup = "Enemies"
 				v.Material = Enum.Material.ForceField
 			end
 		end
@@ -79,8 +78,12 @@ local function SetupViewPorts(ViewportFrame)
 
 		--// Controls the UI
 
-		ViewportFrame.Parent.Activated:Connect(function()
-			PlaceTower(model)
+		ViewportFrame.Parent.Activated:Connect(function() --// Handles Error With Button Spamming
+			if PlaceHolderTower == nil then
+				PlaceTower(model)
+			else
+				return
+			end
 		end)
 
 		game:GetService("RunService").RenderStepped:Connect(function(dt)
@@ -123,7 +126,7 @@ RunService.RenderStepped:Connect(function(deltaTime)
 		if result and result.Instance then
 			if result.Instance.Parent.Name == "TowerArea" then
 				CanPlace = true
-				ColorTower(Color3.new(0.298039, 1, 0.262745))
+				ColorTower(Color3.new(0,1,0))
 				else
 					CanPlace = false
 					ColorTower(Color3.new(1,0,0))
@@ -131,7 +134,7 @@ RunService.RenderStepped:Connect(function(deltaTime)
 			local Positions = 
 			{
 				x = result.Position.X,
-				y = result.Position.Y + PlaceHolderTower.Humanoid.HipHeight,
+				y = result.Position.Y + 3,
 				z = result.Position.Z
 			}
 
