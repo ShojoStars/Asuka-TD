@@ -54,7 +54,12 @@ function module.SpawnTower(Tower,cframe)
             
             AttackAnimation.Stopped:Wait()  -- Wait for the animation to finish
             
-            closestTarget.Humanoid.Health -= damage
+            if closestTarget then
+                 closestTarget.Humanoid.Health -= damage
+                 else
+                    return
+            end
+           
         end
         task.wait(cooldown)
     end
