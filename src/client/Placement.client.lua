@@ -1,3 +1,4 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 --// Dependencies for the Client
 local Player = game.Players.LocalPlayer
@@ -55,9 +56,14 @@ local function ColorTower(Color)
 	end
 end
 
+local JoinEvent = ReplicatedStorage:FindFirstChild("TeleportEvent",true)
+local PlayerData
+JoinEvent.OnClientEvent:Connect(function(JoinData)
+	PlayerData = JoinData
+end)
 --// Handles Tower Viewports
 local function SetupViewPorts(ViewportFrame)
-	for index, model in pairs(Towers:GetChildren()) do
+	for index, model in pairs(PlayerData) do
 		model = model:Clone()
 		ViewportFrame.Parent.Name = model.Name
 		local camera = Instance.new("Camera")
