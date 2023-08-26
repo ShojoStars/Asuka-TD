@@ -11,7 +11,7 @@ local PlaceIDS = {
 }
 
 local GameData = {
-	EquippedTowers = {},
+	EquippedTowers = {"Cure Black","Cure White"},
 	OwnedTowers = {},
 	MaxTowers = 8,
 	Yen = nil,
