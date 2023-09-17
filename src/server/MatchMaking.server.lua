@@ -20,6 +20,7 @@ local GameData = {
 local Towers = {}
 --//
 
+
 --// Few things for the Inventory
 local Datastore = DataStoreService:GetDataStore("PlayersOwnedTowers")
 game.Players.PlayerAdded:Connect(function(player)
@@ -44,7 +45,11 @@ RemoteEvent.OnServerEvent:Connect(function(player, Map)
 	if player and Map ~= nil then
 		for index, Place in PlaceIDS do
 			if Place.Name == Map then
-				TeleportService:Teleport(Place.Id, player, GameData)
+				if Data then
+					TeleportService:Teleport(Place.Id,player,Data)
+					else
+						TeleportService:Teleport(Place.Id,player)
+				end
 			end
 		end
 	end
