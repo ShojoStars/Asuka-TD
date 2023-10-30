@@ -8,9 +8,9 @@ local Chosen = false
 
 local function ChooseMap()
     for i,v in pairs(UI:GetDescendants()) do
-        if v:IsA("TextButton") and v.Parent.Name == "MapButtons" then
+        if v:IsA("ImageButton") and v.Name == "PlayButton" and v.Parent.Parent.Name == "MapButtons" then
             v.MouseButton1Click:Connect(function()
-                Event:FireServer(v.Text)
+                Event:FireServer(v.Parent.Name)
                 Chosen = true
                 UI.Enabled = false
             end)
