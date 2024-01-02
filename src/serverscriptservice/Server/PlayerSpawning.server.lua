@@ -1,7 +1,8 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+script.Enabled = false
+--[[local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TeleportService = game:GetService("TeleportService")
 local RemoteEvent = Instance.new("RemoteEvent")
-RemoteEvent.Name = "TeleportEvent"
+RemoteEvent.Name = "TeleportEve	nt"
 RemoteEvent.Parent = ReplicatedStorage.Variables
 --// Adds Players to Said Collision Groups
 
@@ -21,4 +22,4 @@ game.Players.PlayerAdded:Connect(function(player)
     end)
 end)
 
---// Adds Players to Collision Group ("Players")
+--// Adds Players to Collision Group ("Players")--]]

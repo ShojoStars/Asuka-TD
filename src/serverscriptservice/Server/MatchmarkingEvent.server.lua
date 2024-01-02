@@ -22,7 +22,8 @@ local Towers = {}
 
 
 --// Few things for the Inventory
-local Datastore = DataStoreService:GetDataStore("PlayersOwnedTowers")
+script.Enabled = false
+--[[local Datastore = DataStoreService:GetDataStore("PlayersOwnedTowers")
 game.Players.PlayerAdded:Connect(function(player)
 	Data = Datastore:GetAsync(player.UserId)
 	if Data then
@@ -54,4 +55,6 @@ RemoteEvent.OnServerEvent:Connect(function(player, Map)
 		end
 	end
 end)
---//
+
+
+--]]

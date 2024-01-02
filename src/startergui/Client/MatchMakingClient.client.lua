@@ -1,4 +1,4 @@
-local Player = game.Players.LocalPlayer
+--[[local Player = game.Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 
 local Event = game.ReplicatedStorage:FindFirstChild("MatchMakingEvent")
@@ -35,4 +35,4 @@ Character.Humanoid:GetPropertyChangedSignal("Sit"):Connect(function()
         else
             UI.Enabled = false
     end
-end)
+end)--]]
