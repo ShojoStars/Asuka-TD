@@ -1,0 +1,7 @@
+{
+    "className": "NumberValue",
+
+    "properties": {
+        "Value": 0
+    }
+}
