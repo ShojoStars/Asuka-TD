@@ -11,7 +11,7 @@ local Modules_Folder = ReplicatedStorage:WaitForChild("Modules")
 
 --//Assigments
 local DataName = "Data_"
-local DataVersion = "001"
+local DataVersion = "002"
 
 --//Objects
 local GameData = DataStoreService:GetDataStore(DataName..DataVersion)
@@ -48,15 +48,18 @@ function self:LoadData(Player,Data)
 	if sucess and CurrentData then
 		
 		for FolderName,Value in CurrentData do
-			
 			local FindFolder = PlayerData:FindFirstChild(FolderName)
 			if FindFolder and FindFolder:IsA("Folder") then
 				for ValueName,Value in Value do
-					if typeof(Value) == "boolean" then
+					if typeof(Value) == "boolean" and not FindFolder:FindFirstChild(ValueName) then
 						local NewValue = Instance.new("BoolValue")
 						NewValue.Name = ValueName
 						NewValue.Value = Value
 						NewValue.Parent = FindFolder
+					elseif typeof(Value) == "boolean" and FindFolder:FindFirstChild(ValueName) then
+
+						local BoolVal = FindFolder:FindFirstChild(ValueName)
+						BoolVal.Value = Value
 					end
 				end
 			elseif FindFolder and FindFolder:IsA("NumberValue") and CurrentData[FolderName] then
@@ -91,7 +94,7 @@ function self:SaveData(Player)
 	end
 	
 	if Data then
-		
+		print(Data)
 		--/Check if got sucess getting current data
 		local sucess, fail = pcall(function()
 			return GameData:SetAsync(Player.UserId,Data)

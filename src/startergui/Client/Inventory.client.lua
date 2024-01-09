@@ -47,6 +47,8 @@ local ButtonsImages = {
 	ButtonUnquiped = "rbxassetid://14171553444";
 }
 
+local OpenMenuKey = "Z"
+
 local CoolDown = false
 
 --//Functions
@@ -167,7 +169,7 @@ UserInputService.InputBegan:Connect(function(Key, Event)
 	if Event then return end
 	
 	--/Check key
-	if Key.KeyCode == Enum.KeyCode.Z and not ScreenGui.Enabled and not CoolDown then
+	if Key.KeyCode == Enum.KeyCode[OpenMenuKey] and not ScreenGui.Enabled and not CoolDown then
 		
 		--/Changing Values
 		CoolDown = true
@@ -181,7 +183,7 @@ UserInputService.InputBegan:Connect(function(Key, Event)
 			CoolDown = false
 		end)
 		
-	elseif Key.KeyCode == Enum.KeyCode.Z and ScreenGui.Enabled then
+	elseif Key.KeyCode == Enum.KeyCode[OpenMenuKey] and ScreenGui.Enabled then
 		
 		--/Changing Values
 		CoolDown = true
