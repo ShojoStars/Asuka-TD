@@ -31,6 +31,7 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local TemplateTower = Assets_Folder:WaitForChild("Frames"):WaitForChild("InventoryButton")
 
+--/Inventory Stuff
 local ScreenGuis_Folder = PlayerGui:WaitForChild("ScreenGuis")
 local ScreenGui = ScreenGuis_Folder:WaitForChild("Inventory")
 local MainBoard = ScreenGui:WaitForChild("MainBoard")
@@ -40,6 +41,11 @@ local TowerDetail = MainBoard:WaitForChild("TowerDetail")
 local Equip_TowerDetail = TowerDetail:WaitForChild("Equip")
 local Description_TowerDetail = TowerDetail:WaitForChild("Description")
 local TowerName_TowerDetail = TowerDetail:WaitForChild("TowerName")
+
+--/Hud Stuff
+local ScreenGui_Hud = ScreenGuis_Folder:WaitForChild("HUD")
+local Frames_Hud = ScreenGui_Hud:WaitForChild("Frames")
+local Loadout_Hud = ScreenGui_Hud:WaitForChild("Loadout")
 
 --//Assigments
 local ButtonsImages = {
@@ -199,3 +205,23 @@ UserInputService.InputBegan:Connect(function(Key, Event)
 		end)
 	end
 end)
+
+
+--//Buttons HUD
+for _, Imagelabel in Frames_Hud:GetChildren() do
+	if Imagelabel:IsA("ImageLabel") then
+
+		local FindButton = Imagelabel:FindFirstChildOfClass("ImageButton")
+		
+		if FindButton then
+			--/Mouse Over
+			FindButton.MouseEnter:Connect(function()
+				CreateTween(FindButton,0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0,{Rotation = math.random(-20,20)}):Play()
+			end)
+
+			FindButton.MouseLeave:Connect(function()
+				CreateTween(FindButton,0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.In,0,false,0,{Rotation = 0}):Play()
+			end)
+		end
+	end
+end

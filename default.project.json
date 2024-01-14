@@ -15,7 +15,7 @@
     "StarterGui":{
       "$path":"src/startergui",
       "$ignoreUnknownInstances": true
-    },
+},
 
 
     "Lighting": {

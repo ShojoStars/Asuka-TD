@@ -1,6 +1,6 @@
 {
     "className": "BoolValue",
     "properties": {
-        "Value" : true
+        "Value" : false
     }
 }
